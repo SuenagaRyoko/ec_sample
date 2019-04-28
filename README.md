@@ -12,4 +12,4 @@
 
 Qiitaでメインの処理については解説しているので、よかったらご覧ください
 
-[JavaScriptでなんちゃってECサイトを実装](https://qiita.com/SuenagaRyoko/items/3f9f0deb5233225ea3c1)
+[JavaScriptでなんちゃってECサイトの実装](https://qiita.com/SuenagaRyoko/items/3f9f0deb5233225ea3c1)
