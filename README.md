@@ -4,6 +4,7 @@
 
 [DEMO画面](http://118.27.27.78/ec_sample/index.html)
 
+〈サイトを作ってみたい方へ〉
 - challengeブランチからソースをダウンロードしてください
 - HTML/CSSは実装済みなのでjsの処理を書くところから初めてください
 - 商品一覧画面の処理はscript.js 、購入確認画面はconfirm.jsに書いてください
