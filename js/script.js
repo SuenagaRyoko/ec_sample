@@ -27,7 +27,8 @@ window.onload = function () {
   cart_btns.forEach(function (cart_btn, index) {
     cart_btn.addEventListener('click', function () {
 
-      if (/* カートボタンがすでに押されているかの判定 */) {
+      // カートボタンがすでに押されているかの判定
+      if (clicked.indexOf(index) >= 0) {
 
         for (let i = 0; i < clicked.length; i++) {
           if(clicked[i] == index){
@@ -38,26 +39,24 @@ window.onload = function () {
 
         inactivate_btn(index);
 
-      }else if(/* カートボタンが押されていない場合 */){
+      }else if(clicked.indexOf(index) == -1){
 
+        let name = cart_btn.dataset.name,//商品の名前を取得
+        price = parse_cs(cart_btn.dataset.price);//商品の値段を取得
 
-        let name,//商品の名前を取得
-        price;//商品の値段を取得
-
-        //クリックされた商品をインデックス(clicked)に追加
-
-        //ローカルストレージ保存用の配列に追加
-        /*
-        * @param {Number} id:    商品の識別番号
-        * @param {String} name:  商品の名前
-        * @maram {Number} price: 商品の値段
-        */
+        clicked.push(index);
+        save_items.push({
+          id: index,
+          name: name,
+          price: price
+        });
 
         activate_btn(index);
 
       }
 
       // ローカルストレージに商品データを保管
+      localStorage.setItem("items",JSON.stringify(save_items));
 
     });
   });
@@ -80,7 +79,9 @@ window.onload = function () {
     cart_btns[index].classList.remove('item_cart_btn_active');
   }
 
-
+  function parse_cs(yen) {
+    return Number( yen.replace(/,/, '') );
+  }
 };
 
 

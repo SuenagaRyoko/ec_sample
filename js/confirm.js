@@ -10,13 +10,22 @@ window.onload = function () {
 
   if (items) {
     // カート商品の数分、要素を作成
-    /*
-      <li>
-        <h2>{{ 商品名 }}</h2>
-        <div class="price">{{ 金額 }}</div>
-      </li>
-    */
+    for (let i = 0; i < items.length; i++) {
+      const li = document.createElement('li'),
+      h2 = document.createElement('h2'),
+      price = document.createElement('div');
 
+      price.classList.add('price');
+
+      h2.appendChild(document.createTextNode(items[i].name));
+      price.appendChild(document.createTextNode( format_cs(items[i].price) ));
+      li.appendChild(h2);
+      li.appendChild(price);
+      fragment.appendChild(li);
+
+      // 合計金額を加算
+      total = total + items[i].price;
+    }
   }
 
   // 作成した要素の追加
@@ -26,8 +35,11 @@ window.onload = function () {
 
   confirm_btn.addEventListener('click',function () {
     window.alert(`購入が確定しました。\xA5${ format_cs(total) }`);
-    //localStorageを削除
+    localStorage.removeItem('items');
   });
 
+  function format_cs(yen) {
+    return Number(yen).toLocaleString();
+  }
 
 };
