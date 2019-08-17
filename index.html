@@ -25,32 +25,32 @@
     <div id="wrapper">
         <div class="item_wrapper">
             <ul class="item_list">
-                <shopping-item
-                v-for="item in item_list"
-                v-bind:shop="item"
-                v-bind:key="item.id"
-                ></shopping-item>
+            <!--コンポーネント呼び出し
+                item_listをループできるように渡す
+                propsで定義したshopへitemをバインドする
+                決まり文句でkeyにitemのidを指定する
+                </shopping-item> -->
             </ul>
         </div>
     </div>
 <script>
-Vue.component('shopping-item', {
-    props: ['shop'],
+Vue.component('第一引数はコンポーネント名', { //コンポーネントを作成
+    // コンポーネントを呼び出す際にpropsを指定することで、データを受け取れる,
     template:`<li class="item">
     <div class="item_img">
         <img :src="shop.img" alt="">
     </div>
     <div class="item_textbox">
         <div class="item_title">
-            <h2>{{ shop.item_name }}</h2>
+            <h2>{{ ##商品名## }}</h2>
         </div>
         <div class="item_price">
-            <span class="yen_symbol">¥</span><span class="js_get_price">{{ shop.item_price | format_cs }}</span>
+            <span class="yen_symbol">¥</span><span class="js_get_price">{{ ##値段## | format_cs }}</span>
         </div>
         <div class="item_btnarea">
             <button class="item_cart_btn js_cart_btn"
-            :data-name="shop.item_name"
-            :data-price="shop.item_price">カート
+            data-name属性をバインドする
+            data-price属性をバインドする
             </button>
             <a class="item_buy_btn" href="confirm.html">購入</a>
         </div>
@@ -64,7 +64,7 @@ Vue.filter('format_cs', function (yen) {
 });
 
 const app = new Vue({
-    el:'#wrapper',
+    el:'vueを紐付けるセレクタ指定',
     data: {
         item_list:[
             {id:0, item_name:"ズボン",      item_price:"3000",     img:"img/denim.png"},
