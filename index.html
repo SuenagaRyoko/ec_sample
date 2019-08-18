@@ -23,22 +23,13 @@
       </div>
     </header>
     <div id="wrapper">
-        <div class="item_wrapper">
-            <ul class="item_list">
-            <!--コンポーネント呼び出し
-                item_listをループできるように渡す
-                propsで定義したshopへitemをバインドする
-                決まり文句でkeyにitemのidを指定する
-                </shopping-item> -->
-            </ul>
-        </div>
     </div>
 <script>
 Vue.component('第一引数はコンポーネント名', { //コンポーネントを作成
     // コンポーネントを呼び出す際にpropsを指定することで、データを受け取れる,
     template:`<li class="item">
     <div class="item_img">
-        <img :src="shop.img" alt="">
+        ##item_listにある画像のパスを指定してimgタグを生成##
     </div>
     <div class="item_textbox">
         <div class="item_title">
@@ -79,11 +70,16 @@ const app = new Vue({
             {id:9, item_name:"ダンベル",    item_price:"1000",     img:"img/dumbbell.png"},
         ]
     },
-    filters: {
-        format_cs: function(yen) {
-            return Number(yen).toLocaleString();
-        }
-    }
+    template:`
+        <div class="item_wrapper">
+            <ul class="item_list">
+            コンポーネント呼び出し
+                item_listをループできるように渡す
+                propsで定義したshopへitemをバインドする
+                決まり文句でkeyにitemのidを指定する
+                </shopping_items>
+            </ul>
+        </div>`
 })
 
 </script>
