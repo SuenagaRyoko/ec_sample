@@ -1,15 +1,16 @@
 window.onload = function () {
-  var cart_btns = document.querySelectorAll('.js_cart_btn'),//カートボタン
+  'use strict';
+
+  const cart_btns = document.querySelectorAll('.js_cart_btn'),//カートボタン
   cart_cnt_icon = document.getElementById('js_cart_cnt'),//カートの個数アイコン
-  cart_cnt = 0,//カートのアイテム数
   clicked = [],//クリックされたカートアイコンのインデックス
   save_items = [],//ローカルストレージ保存用の配列
   items = JSON.parse(localStorage.getItem("items"));//ローカルストレージの商品データ配列
-
+  let cart_cnt = 0;//カートのアイテム数
   // すでにカートに商品が入っている場合、カートアイコンのカウント表示とカートボタンをアクティブにする
   if (items) {
-    var id;
-    for (var i = 0; i < items.length; i++) {
+    let id;
+    for (let i = 0; i < items.length; i++) {
       id = items[i].id;
       save_items.push(items[i]);
       clicked.push(id);
@@ -23,13 +24,13 @@ window.onload = function () {
   }
 
   // カートボタンを押した際の処理
-  cart_btns.forEach(function (cart_btn,index) {
-    cart_btn.addEventListener('click',function () {
+  cart_btns.forEach(function (cart_btn, index) {
+    cart_btn.addEventListener('click', function () {
 
       // カートボタンがすでに押されているかの判定
       if (clicked.indexOf(index) >= 0) {
 
-        for (var i = 0; i < clicked.length; i++) {
+        for (let i = 0; i < clicked.length; i++) {
           if(clicked[i] == index){
             clicked.splice(i, 1);
             save_items.splice(i, 1);
@@ -40,8 +41,8 @@ window.onload = function () {
 
       }else if(clicked.indexOf(index) == -1){
 
-        var name = cart_btn.dataset.name,//商品の名前を取得
-        price = Number(cart_btn.dataset.price);//商品の値段を取得
+        let name = cart_btn.dataset.name,//商品の名前を取得
+        price = parse_cs(cart_btn.dataset.price);//商品の値段を取得
 
         clicked.push(index);
         save_items.push({
@@ -78,6 +79,9 @@ window.onload = function () {
     cart_btns[index].classList.remove('item_cart_btn_active');
   }
 
+  function parse_cs(yen) {
+    return Number( yen.replace(/,/, '') );
+  }
 };
 
 
